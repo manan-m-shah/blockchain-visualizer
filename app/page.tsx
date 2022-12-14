@@ -1,6 +1,11 @@
 'use client'
 import type { NextPage } from 'next'
 import { useContext } from 'react'
+import AccountInfo from '../components/AccountInfo'
+import ActionPanel from '../components/ActionPanel'
+import BlockchainComponent from '../components/BlockchainComponent'
+import BlockInfo from '../components/BlockInfo'
+import TransactionInfo from '../components/TransactionInfo'
 import AppContext from '../context/AppContext'
 import { ActionKind } from '../types/Context'
 
@@ -8,9 +13,15 @@ const Home: NextPage = () => {
     const { state, dispatch } = useContext(AppContext)
     console.log(state)
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center py-2">
-            <h1 className='p-10 bg-blue-200'>{state.count}</h1>
-            <button onClick={() => dispatch({ type: ActionKind.COUNT, payload: 1 })}>Increment</button>
+        <div className="grid grid-rows-3 w-full gap-y-8 p-4 min-h-screen h-full">
+            <div className='grid row-span-2 grid-cols-3 gap-x-8'>
+                <AccountInfo />
+                <BlockInfo />
+                <ActionPanel />
+            </div>
+            <div className='grid row-span-1'>
+                <BlockchainComponent />
+            </div>
         </div>
     )
 }
